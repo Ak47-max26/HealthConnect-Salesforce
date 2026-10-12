@@ -1,0 +1,33 @@
+<template>
+    <section class="panel">
+        <h1>My Healthcare Cases</h1>
+        <p class="intro">
+            View your healthcare requests and follow-ups.
+        </p>
+
+        <template lwc:if={hasError}>
+            <p class="error">{errorMessage}</p>
+        </template>
+
+        <template lwc:if={casesResult.data}>
+            <template lwc:if={hasCases}>
+                <template for:each={cases} for:item="item">
+                    <article key={item.Id} class="case-card">
+                        <h2>Case #{item.CaseNumber}</h2>
+                        <p><strong>Subject:</strong> {item.Subject}</p>
+                        <p><strong>Status:</strong> {item.Status}</p>
+                        <p><strong>Priority:</strong> {item.Priority}</p>
+                    </article>
+                </template>
+            </template>
+
+            <template lwc:else>
+                <p>No healthcare cases are currently linked to your account.</p>
+            </template>
+        </template>
+
+        <template lwc:if={casesResult.isLoading}>
+            <p>Loading your cases...</p>
+        </template>
+    </section>
+</template>
