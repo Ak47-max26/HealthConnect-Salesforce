@@ -1,0 +1,8 @@
+trigger HealthConnectCaseTrigger on Case (
+    before insert,
+    before update
+) {
+    if (Trigger.isBefore) {
+        HealthConnectCaseHandler.beforeSave(Trigger.new);
+    }
+}
